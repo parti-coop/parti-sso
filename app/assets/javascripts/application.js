@@ -12,5 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require casino
 //= require turbolinks
 //= require_tree .
