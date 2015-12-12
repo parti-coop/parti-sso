@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  include CASino::SessionsHelper
-
   before_action :ensure_signed_in,  only: [:edit, :update, :destroy]
   before_action :correct_user,      only: [:edit, :update, :destroy]
 
@@ -13,7 +11,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      data = { authenticator: 'ActiveRecord', user_data: { username:  @user.username } }
+      data = { authenticator: 'parti_database', user_data: { username:  @user.username } }
       sign_in(data)
     else
       render 'new'
