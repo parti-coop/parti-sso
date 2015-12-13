@@ -76,4 +76,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_dispatch.encrypted_cookie_salt = ENV["SSO_ENCRYPTED_COOKIE_SALT"]
+  config.action_dispatch.encrypted_signed_cookie_salt = ENV["SSO_ENCRYPTED_SIGNED_COOKIE_SALT"]
 end
