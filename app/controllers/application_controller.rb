@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   private
 
   def sign_in_action?
+    (controller_name == 'sessions' and action_name == 'new') or
     (controller_name == 'sessions' and action_name == 'create') or
     (controller_name == 'users' and action_name == 'create')
   end
