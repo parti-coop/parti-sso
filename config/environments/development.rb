@@ -38,4 +38,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.action_dispatch.encrypted_cookie_salt = 'Zx4?=P:soCe|l-Ib={iPikI5lty,-Cd<LC7gPxoOY4/g5HxG,4nGDj)wsfl|:65;'
+  config.action_dispatch.encrypted_signed_cookie_salt = '$Y8WOE[kfE(|::q|P#LgINM4]^&>!&5O*xCOcO~ka74d$-*xxZI+NKsNgTrtB$9#'
 end
