@@ -21,8 +21,4 @@
 
 en:
   login:
-    label_username: 'Email'
-  activerecord:
-    attributes:
-      user:
-        username: 'Email'
+    label_username: 'Email(or username)'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210090307) do
+ActiveRecord::Schema.define(version: 20151216185314) do
 
   create_table "casino_auth_token_tickets", force: :cascade do |t|
     t.string   "ticket",     null: false
@@ -114,12 +114,14 @@ ActiveRecord::Schema.define(version: 20151210090307) do
   add_index "casino_users", ["authenticator", "username"], name: "index_casino_users_on_authenticator_and_username", unique: true
 
   create_table "users", force: :cascade do |t|
-    t.string   "username"
+    t.string   "email"
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "nickname",        null: false
   end
 
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["nickname"], name: "index_users_on_nickname", unique: true
 
 end

@@ -5,8 +5,10 @@
     = form_for(@user) do |f|
       = render 'shared/error_messages', object: f.object
       = hidden_field_tag :service, params[:service]
-      = f.label :username
-      = f.text_field :username
+      = f.label :email
+      = f.text_field :email
+      = f.label :nickname
+      = f.text_field :nickname
       = f.label :password
       = f.password_field :password
       = f.label :password_confirmation, "Confirmation"

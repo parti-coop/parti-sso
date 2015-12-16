@@ -2,8 +2,15 @@ class UsersController < ApplicationController
   before_action :ensure_signed_in,  only: [:edit, :update, :destroy]
   before_action :correct_user,      only: [:edit, :update, :destroy]
 
+  def show
+    @user = User.find(params[:id])
+  end
+
   def new
-    redirect_to(:back) if signed_in?
+    if signed_in?
+      @user = current_user
+      render 'edit'
+    end
 
     @user = User.new
   end
@@ -11,7 +18,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      data = { authenticator: 'parti_database', user_data: { username:  @user.username } }
+      data = { authenticator: 'parti_database', user_data: { username:  @user.email } }
       sign_in(data)
     else
       render 'new'
@@ -30,16 +37,11 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User destroyed."
-    redirect_to users_url
-  end
-
   private
 
   def user_params
-    params.require(:user).permit(:username, :password,
+    params.require(:user).permit(:nickname, :email,
+                                 :password,
                                  :password_confirmation)
   end
 

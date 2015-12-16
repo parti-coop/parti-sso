@@ -12,11 +12,13 @@ defaults: &defaults
     footer_text: "Powered by <a href=\"http://rbcas.com/\">CASino</a>"
   authenticators:
     parti_database:
-      authenticator: "ActiveRecord"
+      authenticator: "Parti"
       options:
         table: "users"
-        username_column: "username"
+        username_column: "email"
         password_column: "password_digest"
+        extra_attributes:
+          nickname: "nickname"
 
 development:
   <<: *defaults
