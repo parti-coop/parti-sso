@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  validates :password, length: { minimum: 6 }
-
   VALID_NICKNAME_REGEX = /\A[a-z0-9_]+\z/i
   validates :nickname,
     presence: true,
@@ -13,5 +11,7 @@ class User < ActiveRecord::Base
     presence: true,
     format: { with: VALID_EMAIL_REGEX },
     uniqueness: { case_sensitive: false }
+
   has_secure_password
+  validates :password, length: { minimum: 6 }, allow_nil: true
 end

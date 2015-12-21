@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :ensure_signed_in,  only: [:edit, :update, :destroy]
-  before_action :correct_user,      only: [:edit, :update, :destroy]
+  before_action :correct_user,      only: [:destroy]
 
   def show
     @user = User.find(params[:id])
@@ -18,7 +18,6 @@ class UsersController < ApplicationController
     end
   end
 
-
   def new
     if signed_in?
       @user = current_user
@@ -29,28 +28,24 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(create_params)
     if @user.save
-      data = { authenticator: 'parti_database',
-        user_data: {
-          username:  @user.email,
-          extra_attributes: @user.as_json(except: [:id, :email, :created_at, :updated_at, :password_digest])
-        }
-      }
-      sign_in(data)
-
+      sign_in_as_user
     else
       render 'new'
     end
   end
 
   def edit
+    @user = User.find_by email: current_user.username
+    redirect_to(casino.login_path) and return if @user.nil?
   end
 
   def update
-    if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
-      redirect_to @user
+    @user = User.find_by email: current_user.username
+    redirect_to(casino.login_path) and return if @user.nil?
+    if @user.update_attributes update_params
+      sign_in_as_user
     else
       render 'edit'
     end
@@ -58,10 +53,14 @@ class UsersController < ApplicationController
 
   private
 
-  def user_params
+  def create_params
     params.require(:user).permit(:nickname, :email,
                                  :password,
                                  :password_confirmation)
+  end
+
+  def update_params
+    params.require(:user).permit(:nickname)
   end
 
   def correct_user
@@ -71,5 +70,15 @@ class UsersController < ApplicationController
 
   def sessions_path
     casino.sessions_path
+  end
+
+  def sign_in_as_user
+    data = { authenticator: 'parti_database',
+      user_data: {
+        username:  @user.email,
+        extra_attributes: @user.as_json(except: [:id, :email, :created_at, :updated_at, :password_digest])
+      }
+    }
+    sign_in(data)
   end
 end

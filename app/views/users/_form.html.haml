@@ -1,0 +1,18 @@
+.form
+  = form_for(@user) do |f|
+    = render 'shared/error_messages', object: f.object
+    = hidden_field_tag :service, params[:service]
+    - unless @user.persisted?
+      = f.label :email
+      = f.text_field :email
+    = f.label :nickname
+    = f.text_field :nickname
+    - unless @user.persisted?
+      = f.label :password
+      = f.password_field :password
+      = f.label :password_confirmation, "Confirmation"
+      = f.password_field :password_confirmation
+    - unless @user.persisted?
+      = f.submit "Create my account", class: 'button'
+    - else
+      = f.submit "Save", class: 'button'
