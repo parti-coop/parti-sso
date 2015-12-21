@@ -6,6 +6,19 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def fetch
+    key = params[:key]
+    @user = User.find_by(email: key) || User.find_by(nickname: key)
+
+    render text: "Not found", status: 404 and return if @user.nil?
+    respond_to do |format|
+      format.json {
+        render json: @user.as_json(root: true, except: [:id, :created_at, :updated_at, :password_digest])
+      }
+    end
+  end
+
+
   def new
     if signed_in?
       @user = current_user
@@ -18,8 +31,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      data = { authenticator: 'parti_database', user_data: { username:  @user.email } }
+      data = { authenticator: 'parti_database',
+        user_data: {
+          username:  @user.email,
+          extra_attributes: @user.as_json(except: [:id, :email, :created_at, :updated_at, :password_digest])
+        }
+      }
       sign_in(data)
+
     else
       render 'new'
     end
