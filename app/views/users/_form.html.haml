@@ -5,13 +5,20 @@
     - unless @user.persisted?
       = f.label :email
       = f.text_field :email
-    = f.label :nickname
-    = f.text_field :nickname
-    - unless @user.persisted?
+      = f.label :nickname
+      = f.text_field :nickname
       = f.label :password
       = f.password_field :password
       = f.label :password_confirmation, "Confirmation"
       = f.password_field :password_confirmation
+    - else
+      .row
+        = f.label :email
+        %strong
+          = @user.email
+        = f.label :nickname
+        %strong
+          = @user.nickname
     - unless @user.persisted?
       = f.submit "Create my account", class: 'button'
     - else

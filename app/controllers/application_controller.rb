@@ -7,13 +7,17 @@ class ApplicationController < ActionController::Base
 
   after_action do
     if sign_in_action? and signed_in?
-      session[:cas_username] = current_user.username
+      session[:cas_username] = current_username
     elsif sign_out_action? and !signed_in?
       session.delete :cas_username
     end
   end
 
   private
+
+  def current_username
+    current_user.username
+  end
 
   def sign_in_action?
     (controller_name == 'sessions' and action_name == 'new') or

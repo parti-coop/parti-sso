@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   mount CASino::Engine => '/', :as => 'casino'
   get 'users/fetch', to: 'users#fetch'
   get 'users/edit', to: 'users#edit'
-  resources :users, exclude: [:edit]
+  resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
