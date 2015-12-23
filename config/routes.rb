@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   mount CASino::Engine => '/', :as => 'casino'
   get 'users/fetch', to: 'users#fetch'
   get 'users/edit', to: 'users#edit'
   resources :users
+  resources :password_resets, only: [:new, :create, :edit, :update]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

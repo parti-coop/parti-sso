@@ -21,4 +21,6 @@
         = button_tag t('login.label_button'), :class => 'button'
   %div(style="width: 100%; text-align: center; margin-top: 10px;")
     = link_to 'Sign up now!', main_app.new_user_path(service: params[:service])
+    \|
+    = link_to 'Forgot password', main_app.new_password_reset_path
   = render 'footer'

@@ -1,0 +1,9 @@
+.container
+.box
+  %h1 Forgot password
+  .form
+    = form_for(:password_reset, url: password_resets_path) do |f|
+      = render 'shared/flash_messages', object: f.object
+      = f.label :email
+      = f.text_field :email
+      = f.submit "Submit", class: 'button'
