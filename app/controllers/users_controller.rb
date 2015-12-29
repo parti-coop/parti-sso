@@ -54,8 +54,9 @@ class UsersController < ApplicationController
   end
 
   def image
-    @user = User.find(params[:id])
-    send_file "#{Rails.root}/public#{@user.image_url}", :disposition => 'inline'
+    @user = User.find_by(nickname: params[:nickname])
+    path = @user.try(:image_url) || PictureUploader.new.default_url
+    send_file "#{Rails.root}/public#{path}", :disposition => 'inline'
   end
 
   private

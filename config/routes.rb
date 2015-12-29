@@ -6,10 +6,8 @@ Rails.application.routes.draw do
   mount CASino::Engine => '/', :as => 'casino'
   get 'users/fetch', to: 'users#fetch'
   get 'users/edit', to: 'users#edit'
+  get 'users/images/:nickname', to: 'users#image'
   resources :users do
-    member do
-      get :image
-    end
   end
   resources :password_resets, only: [:new, :create, :edit, :update]
 
