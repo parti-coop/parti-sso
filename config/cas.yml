@@ -19,7 +19,6 @@ defaults: &defaults
         password_column: "password_digest"
         extra_attributes:
           nickname: "nickname"
-          image: "image"
 
 development:
   <<: *defaults

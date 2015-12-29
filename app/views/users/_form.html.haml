@@ -12,13 +12,24 @@
       = f.label :password_confirmation, "Confirmation"
       = f.password_field :password_confirmation
     - else
-      .row
+      .rows
         = f.label :email
-        %strong
+        %strong.text-primary
           = @user.email
         = f.label :nickname
-        %strong
+        %strong.text-primary
           = @user.nickname
+    .rows
+      = f.label :image
+      #user-image.fileinput.fileinput-new{"data-provides": "fileinput"}
+        .fileinput-preview.thumbnail{data: {trigger: "fileinput", origin: (@user.image_url if @user.image.present?)}, style: "width: 200px; height: 150px;"}
+        %div
+          %span.btn.btn-default.btn-file><
+            %span.fileinput-new< 불러오기
+            %span.fileinput-exists< 불러오기
+            = f.file_field :image
+          %a.btn.btn-default.fileinput-exists{"data-dismiss" => "fileinput", :href => "#"} 원래 이미지로
+
     - unless @user.persisted?
       = f.submit "Create my account", class: 'button'
     - else

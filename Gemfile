@@ -18,6 +18,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'haml-rails', '~> 0.9.0'
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.5.1'
+gem 'jasny-bootstrap-rails', '~> 3.1', '>= 3.1.3'
 
 # tools
 gem 'jbuilder', '~> 2.0'

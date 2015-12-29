@@ -1,17 +1,23 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file.
-//
-// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
-// about supported directives.
-//
 //= require jquery
 //= require jquery_ujs
 //= require casino
+//= require bootstrap
+//= require jasny-bootstrap
 //= require turbolinks
 //= require_tree .
+
+$(function() {
+  function _preview_orgin() {
+    $("#user-image .fileinput-preview").html(function() {
+      if($(this).data('origin') !== undefined) {
+        return '<img src=' + $(this).data('origin') + '>';
+      }
+    });
+  }
+
+  _preview_orgin();
+  $("#user-image").on("clear.bs.fileinput", function(e) {
+    e.stopPropagation();
+    _preview_orgin();
+  });
+});
