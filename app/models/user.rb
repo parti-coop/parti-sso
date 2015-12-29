@@ -17,7 +17,9 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }, allow_nil: true
 
-  before_save   :downcase_email
+  before_save :downcase_email
+
+  mount_uploader :image, PictureUploader
 
   def create_reset_digest
     self.reset_token = User.new_token

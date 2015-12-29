@@ -53,6 +53,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def image
+    @user = User.find(params[:id])
+    send_file "#{Rails.root}/public#{@user.image_url}", :disposition => 'inline'
+  end
+
   private
 
   def create_params
