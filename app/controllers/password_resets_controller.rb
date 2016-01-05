@@ -46,7 +46,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def valid_user
-    unless (@user && @user.authenticated?(:reset, params[:id]))
+    unless (@user && @user.reset_authenticated?(params[:id]))
       redirect_to casino.login_path
     end
   end

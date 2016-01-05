@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151229020733) do
+ActiveRecord::Schema.define(version: 20151231141709) do
+
+  create_table "api_keys", force: :cascade do |t|
+    t.integer  "user_id",                        null: false
+    t.string   "digest",                         null: false
+    t.string   "server",                         null: false
+    t.string   "client",                         null: false
+    t.datetime "expires_at",                     null: false
+    t.datetime "last_access_at",                 null: false
+    t.boolean  "is_locked",      default: false, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "api_keys", ["client"], name: "index_api_keys_on_client"
+  add_index "api_keys", ["server"], name: "index_api_keys_on_server"
+  add_index "api_keys", ["user_id", "client", "server"], name: "index_api_keys_on_user_id_and_client_and_server", unique: true
 
   create_table "casino_auth_token_tickets", force: :cascade do |t|
     t.string   "ticket",     null: false
@@ -122,6 +138,7 @@ ActiveRecord::Schema.define(version: 20151229020733) do
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
     t.string   "image"
+    t.string   "access_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

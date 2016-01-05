@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'envyable', '~> 0.2.0'
 gem 'carrierwave', '~> 0.10.0'
+gem 'grape', '~> 0.14.0'
+gem 'grape-active_model_serializers', '~> 1.3', '>= 1.3.2'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -35,6 +37,7 @@ gem 'carrierwave', '~> 0.10.0'
 
 group :development, :test do
   gem 'byebug'
+  gem 'minitest-focus',     '~> 1.1', '>= 1.1.2'
   gem 'mocha', '~> 1.1'
 end
 

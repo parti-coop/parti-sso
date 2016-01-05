@@ -7,10 +7,10 @@ Rails.application.routes.draw do
   get 'users/fetch', to: 'users#fetch'
   get 'users/edit', to: 'users#edit'
   get 'users/images/:nickname', to: 'users#image'
-  resources :users do
-  end
+  resources :users
   resources :password_resets, only: [:new, :create, :edit, :update]
 
+  mount API::Base, at: "/"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

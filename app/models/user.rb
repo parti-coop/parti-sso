@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  attr_accessor :remember_token, :activation_token, :reset_token
+  attr_accessor :reset_token
+
+  has_many :api_keys
 
   VALID_NICKNAME_REGEX = /\A[a-z0-9_]+\z/i
   validates :nickname,
@@ -22,7 +24,7 @@ class User < ActiveRecord::Base
   mount_uploader :image, PictureUploader
 
   def create_reset_digest
-    self.reset_token = User.new_token
+    self.reset_token = self.class.new_token
     update_attribute(:reset_digest,  User.digest(reset_token))
     update_attribute(:reset_sent_at, Time.zone.now)
   end
@@ -31,14 +33,17 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver_now
   end
 
-  def authenticated?(attribute, token)
-    digest = send("#{attribute}_digest")
-    return false if digest.nil?
-    BCrypt::Password.new(digest).is_password?(token)
+  def reset_authenticated?(token)
+    return false if reset_digest.nil?
+    BCrypt::Password.new(reset_digest).is_password?(token)
   end
 
   def password_reset_expired?
     reset_sent_at < 2.days.ago
+  end
+
+  def casino_username
+    self.email
   end
 
   private
