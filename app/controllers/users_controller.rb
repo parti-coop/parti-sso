@@ -46,7 +46,8 @@ class UsersController < ApplicationController
   def update
     @user = User.find_by email: current_user.username
     redirect_to(casino.login_path) and return if @user.nil?
-    if @user.update_attributes update_params
+
+    if params[:user].blank? or @user.update_attributes(update_params)
       sign_in_as(@user)
     else
       render 'edit'
