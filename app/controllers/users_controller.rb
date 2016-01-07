@@ -10,7 +10,13 @@ class UsersController < ApplicationController
 
   def fetch
     key = params[:key]
-    @user = User.find_by(email: key) || User.find_by(nickname: key)
+    nickname = params[:nickname]
+
+    if key.present?
+      @user = User.find_by(email: key) || User.find_by(nickname: key)
+    elsif nickname.present?
+      @user = User.find_by(nickname: nickname)
+    end
 
     render text: "Not found", status: 404 and return if @user.nil?
     respond_to do |format|
