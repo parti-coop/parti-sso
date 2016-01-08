@@ -24,6 +24,13 @@ class UsersControllerTest < ActionController::TestCase
     end
   end
 
+  focus
+  test 'should sign_in for edit' do
+    get(:edit)
+
+    assert_redirected_to @controller.casino.login_path
+  end
+
   def create_user
     post(:create, user: { nickname: USER_NICKNAME, email: USER_EMAIL,
                           password: 'tset!x333',

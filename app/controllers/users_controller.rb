@@ -68,6 +68,10 @@ class UsersController < ApplicationController
 
   private
 
+  def login_path
+    casino.login_path
+  end
+
   def create_params
     params.require(:user).permit(:nickname, :email,
                                  :password,
