@@ -6,7 +6,7 @@
       = login_notice
   .login.box
     = render 'messages'
-    %h1(style='float: left; margin-right: 20px;') parti.xyz
+    %h1(style='float: left; padding: 15px; margin-right: 60px') parti.xyz
     .form
       = form_tag(login_path, method: :post, id: 'login-form') do
         = hidden_field_tag :lt, CASino::LoginTicket.create.ticket
@@ -20,7 +20,7 @@
           = t('login.label_remember_me')
         = button_tag t('login.label_button'), :class => 'button'
   %div(style="width: 100%; text-align: center; margin-top: 10px;")
-    = link_to 'Sign up now!', main_app.new_user_path(service: params[:service])
+    = link_to '가입하기', main_app.new_user_path(service: params[:service])
     \|
-    = link_to 'Forgot password', main_app.new_password_reset_path
+    = link_to '비밀번호 찾기', main_app.new_password_reset_path
   = render 'footer'

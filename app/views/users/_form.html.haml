@@ -3,13 +3,13 @@
     = render 'shared/error_messages', object: f.object
     = hidden_field_tag :service, params[:service]
     - unless @user.persisted?
-      = f.label :email
+      = f.label :email, "이메일"
       = f.text_field :email
-      = f.label :nickname
+      = f.label :nickname, "별명"
       = f.text_field :nickname
-      = f.label :password
+      = f.label :password, "비밀번호"
       = f.password_field :password
-      = f.label :password_confirmation, "Confirmation"
+      = f.label :password_confirmation, "비밀번호 확인"
       = f.password_field :password_confirmation
     - else
       .rows
@@ -20,7 +20,7 @@
         %strong.text-primary
           = @user.nickname
     .rows
-      = f.label :image
+      = f.label :image, "프로필 사진"
       #user-image.fileinput.fileinput-new{"data-provides": "fileinput"}
         .fileinput-preview.thumbnail{data: {trigger: "fileinput", origin: (@user.image_url if @user.image.present?)}, style: "width: 200px; height: 150px;"}
         %div
@@ -31,6 +31,6 @@
           %a.btn.btn-default.fileinput-exists{"data-dismiss" => "fileinput", :href => "#"} 원래 이미지로
 
     - unless @user.persisted?
-      = f.submit "Create my account", class: 'button'
+      = f.submit "가입하기", class: 'button'
     - else
-      = f.submit "Save", class: 'button'
+      = f.submit "저장하기", class: 'button'
