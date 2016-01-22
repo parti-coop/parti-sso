@@ -1,12 +1,12 @@
 .container
 .box
-  %h1 Forgot password
+  %h1 비밀번호 초기화
   .form
     = form_for(@user, url: password_reset_path(params[:id])) do |f|
       = render 'shared/error_messages', object: f.object
       = hidden_field_tag :email, @user.email
-      = f.label :password
+      = f.label :password, "비밀번호"
       = f.password_field :password
-      = f.label :password_confirmation, "Confirmation"
+      = f.label :password_confirmation, "비밀번호 확인"
       = f.password_field :password_confirmation
-      = f.submit "Update password", class: "button"
+      = f.submit "비밀번호 수정하기", class: "button"

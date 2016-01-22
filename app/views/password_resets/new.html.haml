@@ -1,9 +1,9 @@
 .container
 .box
-  %h1 Forgot password
+  %h1 비밀번호 초기화
   .form
     = form_for(:password_reset, url: password_resets_path) do |f|
       = render 'shared/flash_messages', object: f.object
-      = f.label :email
+      = f.label :email, "이메일"
       = f.text_field :email
-      = f.submit "Submit", class: 'button'
+      = f.submit "보내기", class: 'button'
