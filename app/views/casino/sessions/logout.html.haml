@@ -1,0 +1,12 @@
+.container
+  .logout.box
+    .info
+      %h1= t('logout.title')
+      %p
+        - if @url.nil?
+          = t('logout.logged_out_without_url')
+        - else
+          = t('logout.logged_out_with_url')
+          %a{:href => @url}= @url
+    %img{:src => "https://avatars1.githubusercontent.com/u/14800781?v=3&s=300", :class => 'logo'}
+  = render 'footer'

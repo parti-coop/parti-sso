@@ -39,8 +39,8 @@ ko:
     submit: "Continue"
     invalid_otp: "The one-time password you entered is not correct."
   logout:
-    title: "안녕히가세요."
-    logged_out_without_url: "You have successfully logged out."
+    title: "안녕히 가세요."
+    logged_out_without_url: "로그아웃 했습니다."
     logged_out_with_url: "The application you just logged out of has provided a link it would like you to follow:"
   sessions:
     title: "안녕하세요!"
