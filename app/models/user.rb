@@ -6,9 +6,11 @@ class User < ActiveRecord::Base
   VALID_NICKNAME_REGEX = /\A[a-z0-9_]+\z/i
   validates :nickname,
     presence: true,
+    exclusion: { in: %w(app new edit index session login logout users admin all crew issue group) },
     format: { with: VALID_NICKNAME_REGEX },
     uniqueness: { case_sensitive: false },
     length: { maximum: 20 }
+  validate :nickname_exclude_pattern
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :email,
@@ -59,5 +61,11 @@ class User < ActiveRecord::Base
 
   def downcase_email
     self.email = email.downcase
+  end
+
+  def nickname_exclude_pattern
+    unless self.nickname !~ /\Aparti.*\z/i
+      errors.add(:nickname, "predefined")
+    end
   end
 end
